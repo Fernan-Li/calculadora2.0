@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Cubagem - ArmazeneJá</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .container h1 {
+      color: #FFA500;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 2px solid #FFA500;
+      border-radius: 10px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .resultado {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .mascote {
+      position: absolute;
+      top: -60px;
+      right: -40px;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://i.imgur.com/IxqxW5E.png" alt="Mascote" class="mascote"> <!-- mascote temporário -->
+    <h1>Calcule a sua cubagem</h1>
+
+    <label for="largura">Largura (cm):</label>
+    <input type="number" id="largura" placeholder="Digite a largura">
+
+    <label for="altura">Altura (cm):</label>
+    <input type="number" id="altura" placeholder="Digite a altura">
+
+    <label for="profundidade">Profundidade (cm):</label>
+    <input type="number" id="profundidade" placeholder="Digite a profundidade">
+
+    <label for="quantidade">Quantidade de volumes:</label>
+    <input type="number" id="quantidade" placeholder="Quantas caixas?">
+
+    <label for="dias">Quantidade de dias:</label>
+    <input type="number" id="dias" placeholder="Por quantos dias?">
+
+    <button onclick="calcularCubagem()">Calcular</button>
+
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    function calcularCubagem() {
+      const largura = parseFloat(document.getElementById("largura").value) / 100;
+      const altura = parseFloat(document.getElementById("altura").value) / 100;
+      const profundidade = parseFloat(document.getElementById("profundidade").value) / 100;
+      const quantidade = parseInt(document.getElementById("quantidade").value);
+      const dias = parseInt(document.getElementById("dias").value);
+
+      if (isNaN(largura) || isNaN(altura) || isNaN(profundidade) || isNaN(quantidade) || isNaN(dias)) {
+        document.getElementById("resultado").innerText = "Por favor, preencha todos os campos corretamente.";
+        return;
+      }
+
+      const cubagem = largura * altura * profundidade * quantidade; // em m³
+      const precoPorMetroCubicoPorDia = 3.5; // valor simbólico por m³ por dia
+      const total = cubagem * dias * precoPorMetroCubicoPorDia;
+
+      document.getElementById("resultado").innerText = `Total a pagar: R$ ${total.toFixed(2)} por ${dias} dia(s)`;
+    }
+  </script>
+</body>
+</html>
